@@ -13,3 +13,10 @@ li {
 #form-buttons{
     margin-top: 20px;
 }
+.main-container{
+    padding: 10px;
+    margin: 10px auto;
+}
+.right-side-h3{
+    text-align: center;
+}
