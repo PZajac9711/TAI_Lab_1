@@ -4,3 +4,12 @@ body{
 li {
     display: inline;
 }
+#form-main{
+    margin:20px auto;
+}
+#form-clear-button,#form-submit-button{
+    margin: 10px auto;
+}
+#form-buttons{
+    margin-top: 20px;
+}
