@@ -4,6 +4,10 @@ body{
 li {
     display: inline;
 }
+.navbar{
+  margin: 0;
+  padding: 0;
+}
 #form-main{
     margin:20px auto;
 }
@@ -24,4 +28,18 @@ li {
     text-align: center;
     font-size: 100px;
     margin-top:10px;
+}
+.page-contrainer{
+  position: relative;
+  min-height: 100vh;
+}
+.footer{
+  position: absolute;
+  background-color: #303030;
+  color: #FFF;
+  height: 2.5rem;
+  padding: 10px;
+  text-align: center;
+  width:100%;
+  bottom: 0;
 }
