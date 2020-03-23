@@ -5,16 +5,60 @@
     <title>Patryk Zajac</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link rel="stylesheet" href="css/style_quiz.css">
 
 </head>
 <body>
 <div class = "page-container">
     <div class = "navbar"></div>
+    <div class="container list">
+      <div id = "question-div">Question<span id="question-number"></span>: <h4 class="question"></h4></div>
+
+      <div id = "answers-div">
+        Answers:
+        <ul class="list-group">
+            <li class="list-group-item"></li>
+            <li class="list-group-item"></li>
+            <li class="list-group-item"></li>
+            <li class="list-group-item"></li>
+        </ul>
+      </div>
+      <div class="buttons">
+          <button class="btn btn-danger previous">Previous</button>
+          <button class="btn btn-success next">Next</button>
+      </div>
+
+      <h4>Your score: <span class="score">0</span>/20 points.</h4>
+    </div>
+    <div class="container results" style="display: none">
+        <div class="btn-group-custom">
+            <button class="btn btn-success btn-custom restart">Retake quiz</button>
+        </div>
+        <div class="score">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Point/20</th>
+                    <th>Average</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Your score</th>
+                    <td class="userScorePoint"></td>
+                    <td class="average"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <div class="scroll">
       <button class="btn btn-success"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i> Do góry</button>
     </div>
     <footer class="footer"></footer>
 </div>
+<script src="js/quiz.js"></script>
 <script src="js/scroll.js"></script>
 <script src="js/innerScripts/navbar.js"></script>
 <script src="js/innerScripts/footer.js"></script>
