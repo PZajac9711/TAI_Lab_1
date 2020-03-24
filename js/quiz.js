@@ -8,6 +8,8 @@ fetch('https://quiztai.herokuapp.com/api/quiz')
 
              let questioNumber = document.querySelector("#question-number");
 
+             let result = document.querySelector(".results");
+
              let question = document.querySelector('.question');
              let answers = document.querySelectorAll('.list-group-item');
 
@@ -21,6 +23,7 @@ fetch('https://quiztai.herokuapp.com/api/quiz')
              }
 
              function setQuestion(index) {
+                 answersHolder.get(preQuestions[index].question) == null ? next.disabled = true : next.disabled = false;
                  questioNumber.innerHTML = "(" + (index + 1) + "/" + preQuestions.length + ")";
                  question.innerHTML = preQuestions[index].question;
                  answers[0].innerHTML = preQuestions[index].answers[0];
@@ -56,23 +59,28 @@ fetch('https://quiztai.herokuapp.com/api/quiz')
              function doAction(event) {
                  //event.target - Zwraca referencję do elementu, do którego zdarzenie zostało pierwotnie wysłane.
                  let color = 0; // if color == 1 user hit good answer else color == 0;
+                 next.disabled = false;
                  if(answersHolder.get(preQuestions[index].question) == null){
+                   if(index === 19){
+                       result.style.display = 'block';
+                       saveScore();
+                   }
                    if (event.target.innerHTML === preQuestions[index].correct_answer) {
                        points++;
                        pointsElem.innerText = points;
                        // markCorrect(event.target);
+                       event.target.style.transition = "all 1s";
                        event.target.style.background = '#289a27';
                        color = 1;
                    }
                    else {
+                       event.target.style.transition = "all 1s";
                        event.target.style.background = '#c41a21';
                    }
                    //console.log();
                    answersHolder.set(preQuestions[index].question,[event.target.innerHTML,color]);
                    color = 0;
                  }
-
-
                  /*answersHolder.forEach(function(value, key) {
                    console.log(key + ' = ' + value);
                  });
@@ -95,6 +103,7 @@ fetch('https://quiztai.herokuapp.com/api/quiz')
              }
              function clearMarks(){
                  for(let i = 0; i < 4; i++){
+                   answers[i].style.transition = "all 0s";
                    answers[i].style.background = '#FFF';
                  }
              }
@@ -106,9 +115,33 @@ fetch('https://quiztai.herokuapp.com/api/quiz')
                  points = 0;
                  let userScorePoint = document.querySelector('.score');
                  userScorePoint.innerHTML = points;
-                 // setQuestion(index);
+                 answersHolder.clear();
+                 setQuestion(index);
+                 clearMarks();
                  // activateAnswers();
                  // list.style.display = 'block';
-                 // results.style.display = 'none';
+                 result.style.display = 'none';
              });
+             function saveScore(){
+                 let storage = [];
+                 if(localStorage.getItem("score") === null){
+                     storage.push(points);
+                 }
+                 else{
+                     storage = JSON.parse(localStorage.getItem("score"));
+                     storage.push(points)
+                 }
+                 localStorage.setItem("score", JSON.stringify(storage));
+                 setScoreForUser(storage);
+             }
+             function setScoreForUser(storage){
+                 let userScorePoint = document.querySelector('.userScorePoint');
+                 let averagePoint = document.querySelector('.average');
+                 userScorePoint.innerHTML = points;
+                 let average = 0;
+                 for(let i = 0; i < storage.length; i++){
+                    average+=storage[i];
+                 }
+                 averagePoint.innerHTML = (average/storage.length).toFixed(2);
+             }
 });
